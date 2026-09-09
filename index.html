@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Home Nursing Services</title>
+    <style>
+        :root {
+            --primary-color: #008080; /* Medical Teal */
+            --primary-light: #e6f2f2;
+            --text-main: #2c3e50;
+            --bg-color: #f0f4f8;
+            --whatsapp-green: #25D366;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 500px; /* Mobile-first design width */
+            background-color: #ffffff;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .header p {
+            margin: 5px 0 0 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .booking-form {
+            padding: 2rem 1.5rem;
+        }
+
+        .form-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 0.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .input-group input, 
+        .input-group select, 
+        .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 1rem;
+            background-color: #fafafa;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus, 
+        .input-group select:focus, 
+        .input-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: #fff;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: var(--whatsapp-green);
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 6px rgba(37, 211, 102, 0.2);
+            transition: transform 0.1s, background-color 0.3s;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        .submit-btn:hover {
+            background-color: #20bd5a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="header">
+            <h1>Nursing Care Booking</h1>
+            <p>Professional In-Home Medical Assistance</p>
+        </div>
+
+        <div class="booking-form">
+            <div class="form-title">Patient Details</div>
+            
+            <form id="nursingForm">
+                <div class="input-group">
+                    <label for="patientName">Patient Full Name</label>
+                    <input type="text" id="patientName" placeholder="Enter patient name" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="service">Select Required Service</label>
+                    <select id="service" required>
+                        <option value="" disabled selected>Choose a service...</option>
+                        <option value="Wound Dressing">Wound Dressing / Cleaning</option>
+                        <option value="Doctor Prescribed Injection">Doctor Prescribed Injection</option>
+                        <option value="Suture Removal & Care">Suture Removal & Care</option>
+                        <option value="General Vitals & Follow-up">General Vitals & Follow-up</option>
+                    </select>
+                </div>
+
+                <div class="grid-2">
+                    <div class="input-group">
+                        <label for="visitDate">Visit Date</label>
+                        <input type="date" id="visitDate" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="visitTime">Preferred Time</label>
+                        <input type="time" id="visitTime" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="address">Visit Address</label>
+                    <textarea id="address" rows="3" placeholder="House/Flat No., Street, Landmark (Doddaballapura area)" required></textarea>
+                </div>
+
+                <button type="button" class="submit-btn" onclick="submitBooking()">
+                    Confirm via WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function submitBooking() {
+            // Get form values
+            const name = document.getElementById('patientName').value.trim();
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('visitDate').value;
+            const time = document.getElementById('visitTime').value;
+            const address = document.getElementById('address').value.trim();
+
+            // Validate form
+            if (!name || !service || !date || !time || !address) {
+                alert("Please fill out all fields to complete your booking.");
+                return;
+            }
+
+            // WhatsApp formatting
+            const whatsappNumber = "917619561336";
+            const text = `*New Nursing Service Request*%0A%0A*Patient Name:* ${name}%0A*Service:* ${service}%0A*Date:* ${date}%0A*Time:* ${time}%0A*Address:* ${address}%0A%0AHi, I would like to book this appointment.`;
+            
+            // Redirect to WhatsApp
+            const url = `https://wa.me/${whatsappNumber}?text=${text}`;
+            window.open(url, '_blank');
+        }
+    </script>
+
+</body>
+</html>
