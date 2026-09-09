@@ -150,6 +150,11 @@
                 </div>
 
                 <div class="input-group">
+                    <label for="patientPhone">Phone Number</label>
+                    <input type="tel" id="patientPhone" placeholder="Enter phone number (10 digits)" pattern="[0-9]{10}" maxlength="10" required>
+                </div>
+
+                <div class="input-group">
                     <label for="service">Select Required Service</label>
                     <select id="service" required>
                         <option value="" disabled selected>Choose a service...</option>
@@ -187,20 +192,27 @@
         function submitBooking() {
             // Get form values
             const name = document.getElementById('patientName').value.trim();
+            const phone = document.getElementById('patientPhone').value.trim();
             const service = document.getElementById('service').value;
             const date = document.getElementById('visitDate').value;
             const time = document.getElementById('visitTime').value;
             const address = document.getElementById('address').value.trim();
 
             // Validate form
-            if (!name || !service || !date || !time || !address) {
+            if (!name || !phone || !service || !date || !time || !address) {
                 alert("Please fill out all fields to complete your booking.");
+                return;
+            }
+
+            // Validate phone number (10 digits)
+            if (!/^[0-9]{10}$/.test(phone)) {
+                alert("Please enter a valid 10-digit phone number.");
                 return;
             }
 
             // WhatsApp formatting
             const whatsappNumber = "917619561336";
-            const text = `*New Nursing Service Request*%0A%0A*Patient Name:* ${name}%0A*Service:* ${service}%0A*Date:* ${date}%0A*Time:* ${time}%0A*Address:* ${address}%0A%0AHi, I would like to book this appointment.`;
+            const text = `*New Nursing Service Request*%0A%0A*Patient Name:* ${name}%0A*Phone:* ${phone}%0A*Service:* ${service}%0A*Date:* ${date}%0A*Time:* ${time}%0A*Address:* ${address}%0A%0AHi, I would like to book this appointment.`;
             
             // Redirect to WhatsApp
             const url = `https://wa.me/${whatsappNumber}?text=${text}`;
